@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 2: Analítica Descriptiva y Visualización</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; line-height: 1.7; margin: 0; background: #f8f9fa; color: #333; }
+        header { background: linear-gradient(135deg, #2c3e50, #e74c3c); color: white; padding: 3rem 0; text-align: center; }
+        .container { max-width: 1200px; margin: 2rem auto; padding: 0 20px; }
+        .card { background: white; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); padding: 30px; margin-bottom: 30px; }
+        .step { border-left: 6px solid #e74c3c; padding-left: 20px; margin: 25px 0; }
+        pre { background: #2c3e50; color: #ecf0f1; padding: 18px; border-radius: 10px; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { padding: 12px; border-bottom: 1px solid #ddd; }
+        th { background: #e74c3c; color: white; }
+        .btn { background: #27ae60; color: white; padding: 12px 24px; text-decoration: none; border-radius: 50px; display: inline-block; margin: 10px 5px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-chart-bar"></i> Módulo 2</h1>
+            <p><strong>Analítica Descriptiva y Visualización</strong></p>
+            <p>Duración: 4 horas (2 sesiones)</p>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div class="card">
+            <h2>Objetivos del Módulo</h2>
+            <ul>
+                <li>Realizar un Análisis Descriptivo completo de los datos.</li>
+                <li>Dominar las principales bibliotecas de visualización (Matplotlib y Seaborn).</li>
+                <li>Crear visualizaciones profesionales e interpretables.</li>
+                <li>Extraer insights relevantes para el negocio.</li>
+            </ul>
+        </div>
+
+        <!-- Sesión 3 -->
+        <div class="card">
+            <h2>📊 Sesión 3: Estadística Descriptiva y Visualización Básica</h2>
+            
+            <div class="step">
+                <h3>1. Importar Bibliotecas</h3>
+                <pre><code>import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Configuración visual
+plt.style.use('seaborn-v0_8')
+sns.set_palette("husl")
+%matplotlib inline</code></pre>
+            </div>
+
+            <div class="step">
+                <h3>2. Cargar y Explorar Datos</h3>
+                <pre><code>df = pd.read_csv('ventas.csv', parse_dates=['fecha'])
+print(df.shape)
+df.head()</code></pre>
+            </div>
+
+            <div class="step">
+                <h3>3. Estadística Descriptiva</h3>
+                <pre><code>df.describe().round(2)
+
+# Estadísticas por grupo
+df.groupby('region')['ventas'].agg(['count', 'mean', 'sum', 'std']).round(2)</code></pre>
+            </div>
+        </div>
+
+        <!-- Visualizaciones -->
+        <div class="card">
+            <h2>🎨 Sesión 4: Visualizaciones con Matplotlib y Seaborn</h2>
+            
+            <h3>Visualizaciones Más Importantes</h3>
+            
+            <div class="step">
+                <h4>1. Gráfico de Barras</h4>
+                <pre><code>plt.figure(figsize=(10,6))
+sns.barplot(data=df, x='region', y='ventas', estimator=np.mean)
+plt.title('Ventas Promedio por Región')
+plt.show()</code></pre>
+            </div>
+
+            <div class="step">
+                <h4>2. Gráfico de Líneas (Serie Temporal)</h4>
+                <pre><code>ventas_diarias = df.groupby('fecha')['ventas'].sum()
+plt.figure(figsize=(12,6))
+plt.plot(ventas_diarias.index, ventas_diarias.values)
+plt.title('Evolución de Ventas Diarias')
+plt.xlabel('Fecha')
+plt.ylabel('Ventas')
+plt.grid(True)
+plt.show()</code></pre>
+            </div>
+
+            <div class="step">
+                <h4>3. Histograma y Boxplot</h4>
+                <pre><code>fig, axes = plt.subplots(1, 2, figsize=(14,6))
+sns.histplot(df['ventas'], kde=True, ax=axes[0])
+sns.boxplot(x='region', y='ventas', data=df, ax=axes[1])
+plt.show()</code></pre>
+            </div>
+
+            <div class="step">
+                <h4>4. Heatmap de Correlaciones</h4>
+                <pre><code>plt.figure(figsize=(10,8))
+sns.heatmap(df.corr(numeric_only=True), annot=True, cmap='coolwarm', center=0)
+plt.title('Matriz de Correlación')
+plt.show()</code></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>✅ Tarea del Módulo 2</h2>
+            <p>Realiza un análisis descriptivo completo del dataset de ventas incluyendo:</p>
+            <ul>
+                <li>Al menos 8 visualizaciones diferentes</li>
+                <li>Interpretación de cada gráfico</li>
+                <li>Conclusiones de negocio</li>
+            </ul>
+            <a href="#" class="btn">Descargar Notebook del Módulo 2</a>
+        </div>
+
+    </div>
+
+    <footer style="text-align:center; padding:2rem; background:#2c3e50; color:white;">
+        <p>Módulo 2 - Data Analytics con Pronósticos en Python</p>
+    </footer>
+</body>
+</html>
